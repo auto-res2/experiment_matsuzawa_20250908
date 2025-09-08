@@ -3,18 +3,20 @@
 continual-learning methods (CLIPON + baselines), JSON logger and high-level
 Trainer.
 
-Key fixes (iteration 6):
-1. **Numeric-string safety** – all optimiser hyper-parameters (lr, momentum,
-   weight_decay) are explicitly cast to *float* before being passed to
-   ``torch.optim.SGD``.  This prevents the previously observed
-   ``TypeError: '<' not supported between instances of 'str' and 'float'`` that
-   occurred when YAML parsed scientific-notation scalars as strings.
-2. **Mandatory research paths** – every artefact is now written to the required
-      • JSON results → ``.research/iteration6/``
-      • Figures       → ``.research/iteration6/images``
-3. **Docstring + directory update** – all remaining references to the previous
-   *iteration5* folder were updated to *iteration6* to comply with the current
-   evaluation harness.
+Key fixes (iteration 7):
+1. **Device-mismatch bug-fix** – `BPQ.encode` now automatically moves the
+   codebook tensor to the *same device* as its input before the distance
+   computation.  This eliminates the previous
+   `RuntimeError: Expected all tensors to be on the same device` that occurred
+   whenever feature tensors were on the CPU while the model (and therefore the
+   learnable codebooks) resided on the GPU.
+2. **Research-path update** – all artefacts (JSON results & figures) are now
+   written to the mandatory
+       • JSON results → `.research/iteration7/`
+       • Figures       → `.research/iteration7/images/`
+   directory structure required by the current evaluation harness.
+3. **Docstring refresh** – updated references from *iteration6* to
+   *iteration7* for consistency.
 """
 from __future__ import annotations
 
@@ -138,10 +140,16 @@ class BPQ(nn.Module):
     # ------------------------------------------------------------------
     @torch.no_grad()
     def encode(self, z: torch.Tensor) -> torch.Tensor:
+        """Vector-quantise *z* and return the integer codes (shape: ``B × M``)."""
+        # Ensure the codebooks live on the same device as the incoming tensor.
+        cb = self.codebooks
+        if cb.device != z.device:
+            cb = cb.to(z.device)
+
         b = z.size(0)
-        z_view = z.view(b, self.M, 1, self.sub)           # (B,M,1,sub)
-        d2 = ((z_view - self.codebooks) ** 2).sum(-1)     # (B,M,K)
-        return d2.argmin(-1)                              # (B,M)
+        z_view = z.view(b, self.M, 1, self.sub)       # (B, M, 1, sub)
+        d2 = ((z_view - cb) ** 2).sum(-1)             # (B, M, K)
+        return d2.argmin(-1)                          # (B, M)
 
     def decode(self, codes: torch.Tensor) -> torch.Tensor:
         emb = self.codebooks[torch.arange(self.M).unsqueeze(0), codes]  # (B,M,sub)
@@ -177,7 +185,8 @@ class CLIPON(nn.Module):
 
     # ------------------------------------------------------------------
     def _add_to_buffer(self, feats: torch.Tensor, logits: torch.Tensor):
-        codes = self.bpq.encode(feats.detach().cpu())            # (B,M)
+        # Encode on the *same device* as the features; convert to CPU only for storage.
+        codes = self.bpq.encode(feats.detach()).cpu()            # (B, M)
         if self.buf_codes.numel() == 0:
             self.buf_codes = codes
             self.buf_logits = logits.detach().cpu()
@@ -381,7 +390,7 @@ class Trainer:
         # ------------------------------------------------------------------
         res = dict(dataset=dataset_name, method=method_name, seed=seed,
                    avg_accuracy=acc, runtime_s=runtime)
-        out_dir = Path(".research/iteration6")
+        out_dir = Path(".research/iteration7")
         out_dir.mkdir(parents=True, exist_ok=True)
         json_path = out_dir / f"{dataset_name}_{method_name}_{seed}.json"
         with open(json_path, "w") as f:
@@ -394,7 +403,7 @@ class Trainer:
         # confusion-matrix figure -----------------------------------------
         from matplotlib import pyplot as plt
 
-        img_dir = Path(".research/iteration6/images"); img_dir.mkdir(parents=True, exist_ok=True)
+        img_dir = Path(".research/iteration7/images"); img_dir.mkdir(parents=True, exist_ok=True)
         plt.figure(figsize=(6, 5))
         plt.imshow(cm, interpolation="nearest", cmap="Blues")
         plt.title("Confusion Matrix"); plt.colorbar(); plt.tight_layout()
