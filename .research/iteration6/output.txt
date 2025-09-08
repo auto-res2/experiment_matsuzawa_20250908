@@ -1,0 +1,85 @@
+=== uv sync start Mon Sep  8 03:16:21 PM UTC 2025 ===
+=== uv install end Mon Sep  8 03:17:29 PM UTC 2025 ===
+=== experiment start Mon Sep  8 03:17:29 PM UTC 2025 ===
+{"experiment": "exp1_pareto", "description": "Memory-vs-Accuracy Pareto Front (CIFAR / miniImageNet / Tiny-ImageNet)"}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 11,
+  "avg_accuracy": 0.0405,
+  "runtime_s": 20.26087737083435
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 11, "avg_accuracy": 0.0405, "runtime_s": 20.26087737083435}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 17,
+  "avg_accuracy": 0.0199,
+  "runtime_s": 19.079589128494263
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 17, "avg_accuracy": 0.0199, "runtime_s": 19.079589128494263}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 23,
+  "avg_accuracy": 0.0446,
+  "runtime_s": 18.570438623428345
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 23, "avg_accuracy": 0.0446, "runtime_s": 18.570438623428345}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 29,
+  "avg_accuracy": 0.0256,
+  "runtime_s": 18.8353910446167
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 29, "avg_accuracy": 0.0256, "runtime_s": 18.8353910446167}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 41,
+  "avg_accuracy": 0.0361,
+  "runtime_s": 18.7098069190979
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 41, "avg_accuracy": 0.0361, "runtime_s": 18.7098069190979}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"error": "Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!", "dataset": "split_cifar100", "method": "clipon", "seed": 11}

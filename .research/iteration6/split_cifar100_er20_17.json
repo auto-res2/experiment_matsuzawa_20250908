@@ -1,0 +1,7 @@
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 17,
+  "avg_accuracy": 0.0199,
+  "runtime_s": 19.079589128494263
+}
