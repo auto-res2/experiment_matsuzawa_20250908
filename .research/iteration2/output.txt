@@ -1,0 +1,8 @@
+=== uv sync start Mon Sep  8 03:02:22 PM UTC 2025 ===
+=== uv install end Mon Sep  8 03:03:36 PM UTC 2025 ===
+=== experiment start Mon Sep  8 03:03:36 PM UTC 2025 ===
+
+>>> Running seed 13 for experiment 1
+
+==================== EXPERIMENT 1 ====================
+Verify LEAF recovers latent environments and improves worst-group accuracy without supervision.
