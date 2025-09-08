@@ -1,1 +1,24 @@
-# Please list the required python packages.
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clipon-research"
+version = "0.1.0"
+description = "Refactored CLIP-ON continual-learning experiments"
+authors = [{ name = "Researcher", email = "research@example.com" }]
+readme = "README.md"
+requires-python = ">=3.9"
+
+# Run-time dependencies – kept minimal but sufficient.
+[project.dependencies]
+torch = ">=2.0"
+torchvision = ">=0.15"
+timm = "*"
+datasets = "*"
+PyYAML = "*"
+scikit-learn = "*"
+matplotlib = "*"
+
+[tool.setuptools.packages.find]
+where = ["src"]

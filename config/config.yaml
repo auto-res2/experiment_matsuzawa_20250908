@@ -1,0 +1,50 @@
+# =============================================================
+#  GLOBAL SETTINGS (shared unless overridden per-experiment)
+# =============================================================
+seed_list: [11, 17, 23, 29, 41]
+num_gpus: 8
+batch_size: 128           # per GPU (stream = 256)
+num_workers: 8
+optimiser:
+  name: SGD
+  lr: 0.05
+  momentum: 0.9
+  weight_decay: 5e-4
+scheduler:
+  name: cosine
+  warmup_iter: 200
+aug:
+  rand_aug_N: 2
+  rand_aug_M: 9
+  mixup_alpha: 0.2
+  cutmix_alpha: 1.0
+log_interval: 250
+fig_format: pdf
+
+# =============================================================
+#  EXPERIMENTS
+# =============================================================
+experiments:
+  - id: exp1_pareto
+    description: Memory-vs-Accuracy Pareto Front (CIFAR / miniImageNet / Tiny-ImageNet)
+    datasets: [split_cifar100, split_mini_imagenet, stream_tiny_imagenet]
+    backbones: [resnet18, vit_t16]
+    methods: [er20, mir, mer, aqm, occ, dro_er, sparcl_er, orth_subspace, nispa_nr, clipon]
+    epochs: 10            # per task (stream handled internally)
+    seeds: ${seed_list}
+
+  - id: exp2_scalability
+    description: 1 000-task log-growth stress test (ImageNet-1K)
+    datasets: [imagenet1k_stream]
+    backbones: [resnet18_frozen]
+    methods: [clipon, er5, orth_subspace]
+    epochs: 1
+    seeds: [11]
+
+  - id: exp3_robustness
+    description: Robustness & Jetson deployment (CIFAR-100 checkpoints)
+    datasets: [cifar100_c, cifar100_adv]
+    backbones: [resnet18]
+    methods: [clipon, clipon_bpq_only, er20_trim, aqm]
+    epochs: 0            # evaluation only
+    seeds: [11, 17]
