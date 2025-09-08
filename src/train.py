@@ -6,13 +6,10 @@ original behaviour on a single GPU / CPU.
 """
 from __future__ import annotations
 
-import os
-import time
-from types import SimpleNamespace
-from typing import Dict, Any
-
 import torch
 import torch.nn.functional as F
+from types import SimpleNamespace
+from typing import Dict, Any
 
 from .evaluate import accuracy, row_diff, dirichlet_energy
 

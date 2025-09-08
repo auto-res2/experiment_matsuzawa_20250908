@@ -62,13 +62,18 @@ class SmuSHGCN(nn.Module):
         self.convs = nn.ModuleList()
         self.ctrls = nn.ModuleList()
 
+        # GCN layers -------------------------------------------------------
         self.convs.append(GCNConv(in_dim, hid, add_self_loops=False))
         for _ in range(depth - 2):
             self.convs.append(GCNConv(hid, hid, add_self_loops=False))
         self.convs.append(GCNConv(hid, out_dim, add_self_loops=False))
 
-        for _ in range(depth):
-            self.ctrls.append(_Controller(hid))
+        # Controller layers ------------------------------------------------
+        #   The first controller must see the *input*-dimensional features,
+        #   subsequent ones see the hidden-dimensional representations.
+        dims = [in_dim] + [hid] * (depth - 1)
+        for d in dims:
+            self.ctrls.append(_Controller(d))
 
     # ---------------------------------------------------------
     # Forward
@@ -107,7 +112,7 @@ with open(CFG_PATH, "r", encoding="utf-8") as fh:
 # -----------------------------------------------------------------------------
 # Output directories required by the grading instructions
 # -----------------------------------------------------------------------------
-RES_DIR = pathlib.Path(".research") / "iteration3"
+RES_DIR = pathlib.Path(".research") / "iteration4"
 IMG_DIR = RES_DIR / "images"
 RES_DIR.mkdir(parents=True, exist_ok=True)
 IMG_DIR.mkdir(parents=True, exist_ok=True)
