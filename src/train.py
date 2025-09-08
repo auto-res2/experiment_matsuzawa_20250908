@@ -3,15 +3,15 @@
 continual-learning methods (CLIPON + baselines), JSON logger and high-level
 Trainer.
 
-Key fixes:
-1. Recursive ``CfgNode`` so that *nested* YAML fields can be accessed via the
-   dot-notation (e.g. ``cfg.optimiser.lr``). This resolves the original
-   ``AttributeError: 'dict' object has no attribute 'lr'``.
-2. Robust FIFO-buffer handling in both ``ExperienceReplay`` and ``CLIPON`` – the
-   first insertion no longer triggers dimension-mismatch errors.
-3. All research artefacts are now written to the mandatory directories:
-      • JSON results → ``.research/iteration4/``
-      • Figures       → ``.research/iteration4/images``
+Key fixes (iteration 5):
+1. **Numeric-string safety** – all optimiser hyper-parameters (lr, momentum,
+   weight_decay) are explicitly cast to *float* before being passed to
+   ``torch.optim.SGD``.  This prevents the previously observed
+   ``TypeError: '<' not supported between instances of 'str' and 'float'`` that
+   occurred when YAML parsed scientific-notation scalars as strings.
+2. **Mandatory research paths** – every artefact is now written to the required
+      • JSON results → ``.research/iteration5/``
+      • Figures       → ``.research/iteration5/images``
 """
 from __future__ import annotations
 
@@ -163,9 +163,14 @@ class CLIPON(nn.Module):
         self.register_buffer("buf_logits", torch.empty(0, num_classes))
 
         self.to(self.device)
-        self.opt = torch.optim.SGD(self.parameters(), lr=cfg.optimiser.lr,
-                                   momentum=cfg.optimiser.momentum,
-                                   weight_decay=cfg.optimiser.weight_decay)
+        # ---- optimiser (numeric-string safety) ----------------------------
+        opt_cfg = cfg.optimiser
+        lr           = float(opt_cfg.lr)
+        momentum     = float(opt_cfg.momentum)
+        weight_decay = float(opt_cfg.weight_decay)
+        self.opt = torch.optim.SGD(self.parameters(), lr=lr,
+                                   momentum=momentum,
+                                   weight_decay=weight_decay)
 
     # ------------------------------------------------------------------
     def _add_to_buffer(self, feats: torch.Tensor, logits: torch.Tensor):
@@ -231,9 +236,14 @@ class ExperienceReplay(nn.Module):
         self.head = nn.Linear(feat_dim, num_classes)
         self.to(self.device)
 
-        self.opt = torch.optim.SGD(self.parameters(), lr=cfg.optimiser.lr,
-                                   momentum=cfg.optimiser.momentum,
-                                   weight_decay=cfg.optimiser.weight_decay)
+        # ---- optimiser (numeric-string safety) ----------------------------
+        opt_cfg = cfg.optimiser
+        lr           = float(opt_cfg.lr)
+        momentum     = float(opt_cfg.momentum)
+        weight_decay = float(opt_cfg.weight_decay)
+        self.opt = torch.optim.SGD(self.parameters(), lr=lr,
+                                   momentum=momentum,
+                                   weight_decay=weight_decay)
         # FIFO buffer (CPU tensors) ------------------------------------------
         self.register_buffer("buf_x", torch.empty(0))   # flattened imgs
         self.register_buffer("buf_y", torch.empty(0, dtype=torch.long))
@@ -368,7 +378,7 @@ class Trainer:
         # ------------------------------------------------------------------
         res = dict(dataset=dataset_name, method=method_name, seed=seed,
                    avg_accuracy=acc, runtime_s=runtime)
-        out_dir = Path(".research/iteration4")
+        out_dir = Path(".research/iteration5")
         out_dir.mkdir(parents=True, exist_ok=True)
         json_path = out_dir / f"{dataset_name}_{method_name}_{seed}.json"
         with open(json_path, "w") as f:
@@ -381,7 +391,7 @@ class Trainer:
         # confusion-matrix figure -----------------------------------------
         from matplotlib import pyplot as plt
 
-        img_dir = Path(".research/iteration4/images"); img_dir.mkdir(parents=True, exist_ok=True)
+        img_dir = Path(".research/iteration5/images"); img_dir.mkdir(parents=True, exist_ok=True)
         plt.figure(figsize=(6, 5))
         plt.imshow(cm, interpolation="nearest", cmap="Blues")
         plt.title("Confusion Matrix"); plt.colorbar(); plt.tight_layout()
