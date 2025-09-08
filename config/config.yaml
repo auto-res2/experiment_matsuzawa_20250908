@@ -1,0 +1,72 @@
+global:
+  seeds: [13, 17, 23, 29, 31]
+  precision: bf16-true
+  optimizer:
+    name: adamw
+    lr: 0.001
+    weight_decay: 0.05
+  scheduler:
+    name: cosine
+    warmup_pct: 0.05
+  batch_size: 128
+  num_workers: 16
+  accumulate_grad_batches: 8
+experiments:
+  - id: 1
+    name: latent_env_ood
+    description: Verify LEAF recovers latent environments and improves worst-group accuracy without supervision.
+    datasets:
+      - name: waterbirds
+        hf_id: grodino/waterbirds
+        split: [train, validation, test]
+      - name: celeba_hair
+        hf_id: cpuimage/CelebAHairMask-HQ
+        split: [train, validation, test]
+      - name: cifar10_corrupted
+        hf_id: hendrycks/cifar10_corrupted
+        split: [train, test]
+    models:
+      - arch: resnet50_a1h
+        pretrained: true
+      - arch: vit_base_patch16_224.mocov3
+        pretrained: true
+    leaf:
+      lambda_iib: 0.2
+      k_env: 4
+      tau_cmi: 0.75
+      gamma_cd: 0.3
+    epochs: 200
+  - id: 2
+    name: spurious_localisation_cf
+    description: Evaluate localisation IoU and prediction consistency on counterfactuals.
+    datasets:
+      - name: waterbirds_subset_masks
+        hf_id: grodino/waterbirds
+        split: [test]
+        num_samples: 1000
+    models:
+      - arch: resnet50_a1h
+        pretrained_checkpoint_from_exp1: true
+    leaf:
+      lambda_iib: 0.2
+      k_env: 4
+      tau_cmi: 0.75
+      gamma_cd: 0.3
+    epochs: 0
+  - id: 3
+    name: imagenet_scale_freq
+    description: Train ViT-B/16 with LEAF on ImageNet-1k and evaluate on ImageNet-R/S/C.
+    datasets:
+      - name: imagenet1k
+        hf_id: ILSVRC/imagenet-1k
+        split: [train, validation]
+    models:
+      - arch: vit_base_patch16_224.mocov3
+        pretrained: true
+    leaf:
+      lambda_iib: 0.1
+      k_env: 10
+      tau_cmi: 0.8
+      gamma_cd: 0.3
+    epochs: 100
+    batch_size: 512

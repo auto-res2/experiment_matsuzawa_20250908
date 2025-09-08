@@ -1,1 +1,33 @@
-# Please list the required python packages.
+[project]
+name = "leaf-experiments"
+version = "0.1.0"
+description = "Re-factored LEAF experimental suite"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  {name = "Researcher"},
+]
+
+[project.dependencies]
+torch = ">=2.1"
+torchvision = "*"
+timm = "*"
+lightning = "*"
+hydra-core = "*"
+pyyaml = "*"
+datasets = "*"
+transformers = "*"
+diffusers = "*"
+accelerate = "*"
+seaborn = "*"
+scikit-learn = "*"
+wandb = "*"
+fvcore = "*"
+matplotlib = "*"
+opencv-python = "*"
+pandas = "*"
+
+device = "gpu"
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
