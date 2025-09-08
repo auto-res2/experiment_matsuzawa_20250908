@@ -1,0 +1,125 @@
+=== uv sync start Mon Sep  8 03:24:15 PM UTC 2025 ===
+=== uv install end Mon Sep  8 03:25:21 PM UTC 2025 ===
+=== experiment start Mon Sep  8 03:25:21 PM UTC 2025 ===
+{"experiment": "exp1_pareto", "description": "Memory-vs-Accuracy Pareto Front (CIFAR / miniImageNet / Tiny-ImageNet)"}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 11,
+  "avg_accuracy": 0.0332,
+  "runtime_s": 20.156577348709106
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 11, "avg_accuracy": 0.0332, "runtime_s": 20.156577348709106}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 17,
+  "avg_accuracy": 0.0369,
+  "runtime_s": 20.1572048664093
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 17, "avg_accuracy": 0.0369, "runtime_s": 20.1572048664093}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 23,
+  "avg_accuracy": 0.035,
+  "runtime_s": 20.393864631652832
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 23, "avg_accuracy": 0.035, "runtime_s": 20.393864631652832}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 29,
+  "avg_accuracy": 0.0409,
+  "runtime_s": 20.012285709381104
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 29, "avg_accuracy": 0.0409, "runtime_s": 20.012285709381104}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 41,
+  "avg_accuracy": 0.0391,
+  "runtime_s": 19.316400051116943
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 41, "avg_accuracy": 0.0391, "runtime_s": 19.316400051116943}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 11,
+  "avg_accuracy": 0.2,
+  "runtime_s": 9.559369564056396
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 11, "avg_accuracy": 0.2, "runtime_s": 9.559369564056396}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 17,
+  "avg_accuracy": 0.1424,
+  "runtime_s": 9.446120977401733
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 17, "avg_accuracy": 0.1424, "runtime_s": 9.446120977401733}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 23,
+  "avg_accuracy": 0.2263,
+  "runtime_s": 8.838722467422485
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 23, "avg_accuracy": 0.2263, "runtime_s": 8.838722467422485}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 29,
+  "avg_accuracy": 0.1471,
+  "runtime_s": 8.584860801696777
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 29, "avg_accuracy": 0.1471, "runtime_s": 8.584860801696777}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 41,
+  "avg_accuracy": 0.2445,
+  "runtime_s": 9.164509057998657
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 41, "avg_accuracy": 0.2445, "runtime_s": 9.164509057998657}
+{"error": "Input height (32) doesn't match model (224).", "dataset": "split_cifar100", "method": "er20", "seed": 11}
