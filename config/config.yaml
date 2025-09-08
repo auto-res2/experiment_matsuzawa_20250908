@@ -1,0 +1,16 @@
+exp1:
+  datasets:
+  - cora
+  - pubmed
+  methods:
+  - vanilla
+  - smush
+  depths:
+  - 4
+  - 16
+  - 32
+  hidden_dim: 256
+  max_epochs_by_depth:
+    "4": 400
+    "16": 800
+    "32": 1200

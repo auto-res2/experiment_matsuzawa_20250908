@@ -1,1 +1,22 @@
-# Please list the required python packages.
+[project]
+name = "smush-experiments"
+version = "0.1.0"
+description = "Refactored SmuSH depth-scalability experiments"
+readme = "README.md"
+requires-python = ">=3.9"
+
+# ------------------------------------------------------------------------------
+# Minimum required dependencies copied from the original single-file script.
+# ------------------------------------------------------------------------------
+[project.dependencies]
+torch = "*"
+torch-geometric = "*"
+ogb = "*"
+networkx = "*"
+numpy = "*"
+pyyaml = "*"
+matplotlib = "*"
+seaborn = "*"
+
+[build-system]
+requires = ["setuptools", "wheel"]
