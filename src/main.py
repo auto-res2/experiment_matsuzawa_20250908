@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import json
-import os
 import pathlib
 from types import SimpleNamespace
 
@@ -112,7 +111,7 @@ with open(CFG_PATH, "r", encoding="utf-8") as fh:
 # -----------------------------------------------------------------------------
 # Output directories required by the grading instructions
 # -----------------------------------------------------------------------------
-RES_DIR = pathlib.Path(".research") / "iteration1"
+RES_DIR = pathlib.Path(".research") / "iteration2"
 IMG_DIR = RES_DIR / "images"
 RES_DIR.mkdir(parents=True, exist_ok=True)
 IMG_DIR.mkdir(parents=True, exist_ok=True)
@@ -135,9 +134,19 @@ for dset in exp1_cfg["datasets"]:
         for depth in exp1_cfg["depths"]:
             set_seed(0)
             if method == "vanilla":
-                model = GCN(data.num_features, exp1_cfg["hidden_dim"], int(data.y.max()) + 1, depth)
+                model = GCN(
+                    data.num_features,
+                    exp1_cfg["hidden_dim"],
+                    int(data.y.max()) + 1,
+                    depth,
+                )
             elif method == "smush":
-                model = SmuSHGCN(data.num_features, exp1_cfg["hidden_dim"], int(data.y.max()) + 1, depth)
+                model = SmuSHGCN(
+                    data.num_features,
+                    exp1_cfg["hidden_dim"],
+                    int(data.y.max()) + 1,
+                    depth,
+                )
             else:
                 raise NotImplementedError(method)
 

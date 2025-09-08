@@ -8,15 +8,16 @@ requires-python = ">=3.9"
 # ------------------------------------------------------------------------------
 # Minimum required dependencies copied from the original single-file script.
 # ------------------------------------------------------------------------------
-[project.dependencies]
-torch = "*"
-torch-geometric = "*"
-ogb = "*"
-networkx = "*"
-numpy = "*"
-pyyaml = "*"
-matplotlib = "*"
-seaborn = "*"
+dependencies = [
+  "torch",
+  "torch-geometric",
+  "ogb",
+  "networkx",
+  "numpy",
+  "pyyaml",
+  "matplotlib",
+  "seaborn"
+]
 
 [build-system]
 requires = ["setuptools", "wheel"]
