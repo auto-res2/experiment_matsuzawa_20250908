@@ -1,0 +1,33 @@
+datasets:
+- hf_id: grodino/waterbirds
+  name: waterbirds
+  split:
+  - train
+  - validation
+  - test
+- hf_id: cpuimage/CelebAHairMask-HQ
+  name: celeba_hair
+  split:
+  - train
+  - validation
+  - test
+- hf_id: hendrycks/cifar10_corrupted
+  name: cifar10_corrupted
+  split:
+  - train
+  - test
+description: Verify LEAF recovers latent environments and improves worst-group accuracy
+  without supervision.
+epochs: 200
+id: 1
+leaf:
+  gamma_cd: 0.3
+  k_env: 4
+  lambda_iib: 0.2
+  tau_cmi: 0.75
+models:
+- arch: resnet50_a1h
+  pretrained: true
+- arch: vit_base_patch16_224.mocov3
+  pretrained: true
+name: latent_env_ood
