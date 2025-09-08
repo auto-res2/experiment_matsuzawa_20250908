@@ -5,29 +5,32 @@ description = "Re-factored LEAF experimental suite"
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [
-  {name = "Researcher"},
+  { name = "Researcher" },
 ]
 
-[project.dependencies]
-torch = ">=2.1"
-torchvision = "*"
-timm = "*"
-lightning = "*"
-hydra-core = "*"
-pyyaml = "*"
-datasets = "*"
-transformers = "*"
-diffusers = "*"
-accelerate = "*"
-seaborn = "*"
-scikit-learn = "*"
-wandb = "*"
-fvcore = "*"
-matplotlib = "*"
-opencv-python = "*"
-pandas = "*"
-
-device = "gpu"
+# -----------------------------------------------------------------------------
+# Dependencies
+# -----------------------------------------------------------------------------
+# Per PEP 621, `dependencies` must be an array of strings, not a table.
+dependencies = [
+  "torch>=2.1",
+  "torchvision",
+  "timm",
+  "lightning",
+  "hydra-core",
+  "pyyaml",
+  "datasets",
+  "transformers",
+  "diffusers",
+  "accelerate",
+  "seaborn",
+  "scikit-learn",
+  "wandb",
+  "fvcore",
+  "matplotlib",
+  "opencv-python",
+  "pandas",
+]
 
 [build-system]
 requires = ["setuptools>=42", "wheel"]
