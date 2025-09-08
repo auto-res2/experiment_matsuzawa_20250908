@@ -1,0 +1,95 @@
+=== uv sync start Mon Sep  8 03:34:10 PM UTC 2025 ===
+=== uv install end Mon Sep  8 03:34:17 PM UTC 2025 ===
+=== experiment start Mon Sep  8 03:34:17 PM UTC 2025 ===
+
+========== EXPERIMENT 1 – Depth Scalability ==========
+[Exp1] cora       | vanilla | depth 4   => {'test_acc': 65.70000052452087, 'row_diff': 0.7779874205589294, 'dirichlet_energy': 78290321408.0}
+[Exp1] cora       | vanilla | depth 16  => {'test_acc': 37.700000405311584, 'row_diff': 0.9321795701980591, 'dirichlet_energy': 141.06961059570312}
+[Exp1] cora       | vanilla | depth 32  => {'test_acc': 29.900002479553223, 'row_diff': 0.9600472450256348, 'dirichlet_energy': 1.6073874235153198}
+[Exp1] cora       | smush   | depth 4   => {'test_acc': 13.000001013278961, 'row_diff': nan, 'dirichlet_energy': nan}
+[Exp1] cora       | smush   | depth 16  => {'test_acc': 13.000001013278961, 'row_diff': nan, 'dirichlet_energy': nan}
+[Exp1] cora       | smush   | depth 32  => {'test_acc': 13.000001013278961, 'row_diff': nan, 'dirichlet_energy': nan}
+[Exp1] pubmed     | vanilla | depth 4   => {'test_acc': 60.700005292892456, 'row_diff': 0.9375020861625671, 'dirichlet_energy': 121768648704.0}
+[Exp1] pubmed     | vanilla | depth 16  => {'test_acc': 64.60000276565552, 'row_diff': 0.9706161022186279, 'dirichlet_energy': 67.10720825195312}
+[Exp1] pubmed     | vanilla | depth 32  => {'test_acc': 40.6000018119812, 'row_diff': 0.9930687546730042, 'dirichlet_energy': 0.004908222239464521}
+[Exp1] pubmed     | smush   | depth 4   => {'test_acc': 18.000000715255737, 'row_diff': nan, 'dirichlet_energy': nan}
+[Exp1] pubmed     | smush   | depth 16  => {'test_acc': 18.000000715255737, 'row_diff': nan, 'dirichlet_energy': nan}
+[Exp1] pubmed     | smush   | depth 32  => {'test_acc': 18.000000715255737, 'row_diff': nan, 'dirichlet_energy': nan}
+
+Experiment 1 completed – results saved to .research/iteration4/exp1_results.json
+
+{
+  "cora": {
+    "vanilla": {
+      "4": {
+        "test_acc": 65.70000052452087,
+        "row_diff": 0.7779874205589294,
+        "dirichlet_energy": 78290321408.0
+      },
+      "16": {
+        "test_acc": 37.700000405311584,
+        "row_diff": 0.9321795701980591,
+        "dirichlet_energy": 141.06961059570312
+      },
+      "32": {
+        "test_acc": 29.900002479553223,
+        "row_diff": 0.9600472450256348,
+        "dirichlet_energy": 1.6073874235153198
+      }
+    },
+    "smush": {
+      "4": {
+        "test_acc": 13.000001013278961,
+        "row_diff": NaN,
+        "dirichlet_energy": NaN
+      },
+      "16": {
+        "test_acc": 13.000001013278961,
+        "row_diff": NaN,
+        "dirichlet_energy": NaN
+      },
+      "32": {
+        "test_acc": 13.000001013278961,
+        "row_diff": NaN,
+        "dirichlet_energy": NaN
+      }
+    }
+  },
+  "pubmed": {
+    "vanilla": {
+      "4": {
+        "test_acc": 60.700005292892456,
+        "row_diff": 0.9375020861625671,
+        "dirichlet_energy": 121768648704.0
+      },
+      "16": {
+        "test_acc": 64.60000276565552,
+        "row_diff": 0.9706161022186279,
+        "dirichlet_energy": 67.10720825195312
+      },
+      "32": {
+        "test_acc": 40.6000018119812,
+        "row_diff": 0.9930687546730042,
+        "dirichlet_energy": 0.004908222239464521
+      }
+    },
+    "smush": {
+      "4": {
+        "test_acc": 18.000000715255737,
+        "row_diff": NaN,
+        "dirichlet_energy": NaN
+      },
+      "16": {
+        "test_acc": 18.000000715255737,
+        "row_diff": NaN,
+        "dirichlet_energy": NaN
+      },
+      "32": {
+        "test_acc": 18.000000715255737,
+        "row_diff": NaN,
+        "dirichlet_energy": NaN
+      }
+    }
+  }
+}
+=== experiment end Mon Sep  8 03:35:30 PM UTC 2025 ===
