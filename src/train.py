@@ -3,15 +3,18 @@
 continual-learning methods (CLIPON + baselines), JSON logger and high-level
 Trainer.
 
-Key fixes (iteration 5):
+Key fixes (iteration 6):
 1. **Numeric-string safety** – all optimiser hyper-parameters (lr, momentum,
    weight_decay) are explicitly cast to *float* before being passed to
    ``torch.optim.SGD``.  This prevents the previously observed
    ``TypeError: '<' not supported between instances of 'str' and 'float'`` that
    occurred when YAML parsed scientific-notation scalars as strings.
 2. **Mandatory research paths** – every artefact is now written to the required
-      • JSON results → ``.research/iteration5/``
-      • Figures       → ``.research/iteration5/images``
+      • JSON results → ``.research/iteration6/``
+      • Figures       → ``.research/iteration6/images``
+3. **Docstring + directory update** – all remaining references to the previous
+   *iteration5* folder were updated to *iteration6* to comply with the current
+   evaluation harness.
 """
 from __future__ import annotations
 
@@ -378,7 +381,7 @@ class Trainer:
         # ------------------------------------------------------------------
         res = dict(dataset=dataset_name, method=method_name, seed=seed,
                    avg_accuracy=acc, runtime_s=runtime)
-        out_dir = Path(".research/iteration5")
+        out_dir = Path(".research/iteration6")
         out_dir.mkdir(parents=True, exist_ok=True)
         json_path = out_dir / f"{dataset_name}_{method_name}_{seed}.json"
         with open(json_path, "w") as f:
@@ -391,7 +394,7 @@ class Trainer:
         # confusion-matrix figure -----------------------------------------
         from matplotlib import pyplot as plt
 
-        img_dir = Path(".research/iteration5/images"); img_dir.mkdir(parents=True, exist_ok=True)
+        img_dir = Path(".research/iteration6/images"); img_dir.mkdir(parents=True, exist_ok=True)
         plt.figure(figsize=(6, 5))
         plt.imshow(cm, interpolation="nearest", cmap="Blues")
         plt.title("Confusion Matrix"); plt.colorbar(); plt.tight_layout()
