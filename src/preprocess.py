@@ -1,89 +1,92 @@
-"""preprocess.py – dataset download / preprocessing utilities."""
+"""src/preprocess.py
+Data loading, graph pre-processing and utility helpers that do **not** require
+model awareness live here.
+"""
 from __future__ import annotations
 
-import pathlib
-from functools import lru_cache
+import os
+import random
+from pathlib import Path
+from typing import Tuple
 
+import networkx as nx
+import numpy as np
 import torch
 from torch_geometric.datasets import Planetoid, WikipediaNetwork, WebKB
-from torch_geometric.transforms import NormalizeFeatures
-from torch_geometric.utils import remove_self_loops, add_self_loops
+from torch_geometric.utils import degree
 from ogb.nodeproppred import PygNodePropPredDataset
-import torch_geometric.transforms as T
 
-DATA_ROOT = pathlib.Path("data")
-DATA_ROOT.mkdir(parents=True, exist_ok=True)
-
-__all__ = ["get_dataset"]
-
-# -----------------------------------------------------------------------------
-# Helper functions
-# -----------------------------------------------------------------------------
-
-def _zscore(x: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
-    mean = x[mask].mean(dim=0, keepdim=True)
-    std = x[mask].std(dim=0, keepdim=True).clamp_min_(1e-9)
-    return (x - mean) / std
+__all__ = ["seed_everything", "load_dataset"]
 
 
-# -----------------------------------------------------------------------------
-# Public API
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+#  Deterministic seeding
+# ---------------------------------------------------------------------------
 
-@lru_cache(maxsize=None)
-def get_dataset(name: str):  # noqa: C901 (complexity – mirrors original code)
-    """Return a torch-geometric *Data* object with train/val/test masks."""
+def seed_everything(seed: int):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
+
+# ---------------------------------------------------------------------------
+#  Dataset loader
+# ---------------------------------------------------------------------------
+
+def load_dataset(name: str, device: torch.device) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Download (if necessary) and return a processed `Data` object + structural feats."""
+
     name = name.lower()
-    root = DATA_ROOT / name
+    processed_path = Path(os.getenv("PYG_DATA", "~/.pyg")).expanduser()
 
     if name in {"cora", "citeseer", "pubmed"}:
-        dataset = Planetoid(root=str(root), name=name.capitalize(), transform=NormalizeFeatures())
-        data = dataset[0]
-
+        ds = Planetoid(root=str(processed_path), name=name.capitalize())
+        data = ds[0]
+    elif name in {"texas", "wisconsin"}:
+        ds = WebKB(root=str(processed_path), name=name.capitalize())
+        data = ds[0]
     elif name in {"chameleon", "squirrel"}:
-        dataset = WikipediaNetwork(root=str(root), name=name, transform=NormalizeFeatures())
-        data = dataset[0]
-
-    elif name == "texas":
-        dataset = WebKB(root=str(root), name="Texas", transform=NormalizeFeatures())
-        data = dataset[0]
-
-    elif name == "ogbn-arxiv":
-        dataset = PygNodePropPredDataset(name="ogbn-arxiv", root=str(root))
-        split = dataset.get_idx_split()
-        data = dataset[0]
-        data.y = data.y.squeeze()
-        # Build boolean masks
-        n = data.num_nodes
-        data.train_mask = torch.zeros(n, dtype=torch.bool)
-        data.val_mask = torch.zeros(n, dtype=torch.bool)
-        data.test_mask = torch.zeros(n, dtype=torch.bool)
-        data.train_mask[split["train"]] = True
-        data.val_mask[split["valid"]] = True
-        data.test_mask[split["test"]] = True
-        data = T.ToSparseTensor()(data)
-
-    elif name == "ogbn-products":
-        dataset = PygNodePropPredDataset(name="ogbn-products", root=str(root))
-        split = dataset.get_idx_split()
-        data = dataset[0]
-        data.y = data.y.squeeze()
-        n = data.num_nodes
-        data.train_mask = torch.zeros(n, dtype=torch.bool)
-        data.val_mask = torch.zeros(n, dtype=torch.bool)
-        data.test_mask = torch.zeros(n, dtype=torch.bool)
-        data.train_mask[split["train"]] = True
-        data.val_mask[split["valid"]] = True
-        data.test_mask[split["test"]] = True
-        data = T.ToSparseTensor()(data)
+        ds = WikipediaNetwork(root=str(processed_path), name=name.capitalize())
+        data = ds[0]
+    elif name in {"ogbn-arxiv", "ogbn-products"}:
+        ds = PygNodePropPredDataset(name=name)
+        data = ds[0]
+        split_idx = ds.get_idx_split()
+        data.train_mask = torch.zeros(data.num_nodes, dtype=torch.bool)
+        data.val_mask = torch.zeros_like(data.train_mask)
+        data.test_mask = torch.zeros_like(data.train_mask)
+        data.train_mask[split_idx["train"]] = True
+        data.val_mask[split_idx["valid"]] = True
+        data.test_mask[split_idx["test"]] = True
     else:
-        raise ValueError(f"Unknown dataset '{name}'.")
+        raise RuntimeError(f"Dataset '{name}' is not supported or download failed.")
 
-    # ---------------------------------------------------------
-    # Standard feature normalisation and self-loop handling
-    # ---------------------------------------------------------
-    data.x = _zscore(data.x, data.train_mask)
-    data.edge_index, _ = remove_self_loops(data.edge_index)
-    data.edge_index, _ = add_self_loops(data.edge_index)
+    if data.x is None:
+        raise RuntimeError("Node features are missing – aborting run.")
 
-    return data
+    # ------------------------------------------------------------------
+    #  Structural features (degree, clustering coeff., Ollivier-Ricci curvature)
+    # ------------------------------------------------------------------
+    deg = degree(data.edge_index[0]).unsqueeze(-1)
+
+    G_nx = nx.Graph()
+    G_nx.add_edges_from(data.edge_index.t().cpu().numpy())
+    clustering = torch.tensor(list(nx.clustering(G_nx).values())).unsqueeze(-1)
+
+    # optional curvature (fails gracefully if lib not present)
+    try:
+        from GraphRicciCurvature.OllivierRicci import OllivierRicci
+
+        orc = OllivierRicci(G_nx, alpha=0.5, verbose="ERROR")
+        orc.compute_ricci_curvature()
+        curvature_vals = [orc.G.nodes[n]["ricciCurvature"] for n in G_nx.nodes()]
+        curvature = torch.tensor(curvature_vals).unsqueeze(-1)
+    except Exception:
+        curvature = torch.zeros_like(clustering)
+
+    struc_feat = torch.cat([deg, clustering, curvature], dim=-1).float()
+
+    return data.to(device), struc_feat.to(device)

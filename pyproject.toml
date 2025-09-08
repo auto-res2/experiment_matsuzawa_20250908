@@ -1,23 +1,23 @@
-[project]
-name = "smush-experiments"
+[tool.poetry]
+name = "smush-gnn"
 version = "0.1.0"
-description = "Refactored SmuSH depth-scalability experiments"
-readme = "README.md"
-requires-python = ">=3.9"
+description = "Adaptive anti-oversmoothing controller for deep GNNs (SmuSH)."
+authors = ["Research Engineer <research@example.com>"]
+packages = [{include = "src"}]
 
-# ------------------------------------------------------------------------------
-# Minimum required dependencies copied from the original single-file script.
-# ------------------------------------------------------------------------------
-dependencies = [
-  "torch",
-  "torch-geometric",
-  "ogb",
-  "networkx",
-  "numpy",
-  "pyyaml",
-  "matplotlib",
-  "seaborn"
-]
+[tool.poetry.dependencies]
+python = "^3.9"
+torch = "^2.0"
+torch-geometric = "*"
+ogb = "*"
+networkx = "*"
+pyyaml = "*"
+matplotlib = "*"
+seaborn = "*"
+numpy = "*"
+ptflops = "*"
+GraphRicciCurvature = {version = "*", optional = true}
 
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["poetry-core>=1.1.0"]
+build-backend = "poetry.core.masonry.api"

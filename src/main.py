@@ -1,166 +1,91 @@
-"""main.py – entry point (``python -m src.main``)"""
+"""src/main.py
+Entry point for every experiment run.  Execute via
+
+    python -m src.main
+
+This script is intentionally minimal – all heavy lifting happens inside the
+other modules.  It is *only* responsible for
+1. reading `config/config.yaml`,
+2. creating the required directory structure, and
+3. orchestrating the experiment / result dumping loop.
+"""
 from __future__ import annotations
 
 import json
-import pathlib
-from types import SimpleNamespace
+import sys
+from pathlib import Path
+from typing import Any, Dict, List
 
 import yaml
-import torch
 
-from .train import set_seed, train_fullbatch
-from .evaluate import accuracy  # noqa: F401  (imported for YAML / IDE convenience)
-from .preprocess import get_dataset
+from .train import GNNExperiment
 
-# -----------------------------------------------------------------------------
-# Minimal *models* inside the same file to comply with the 6-file restriction
-# -----------------------------------------------------------------------------
-import torch.nn as nn
-import torch.nn.functional as F
-from torch_geometric.nn import GCNConv
+# ---------------------------------------------------------------------------
+#  Paths & directories
+# ---------------------------------------------------------------------------
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = PROJECT_ROOT / "data"
+RESULTS_DIR = PROJECT_ROOT / ".research" / "iteration5"
+IMAGES_DIR = RESULTS_DIR / "images"
+CONFIG_PATH = PROJECT_ROOT / "config" / "config.yaml"
 
+for p in (DATA_DIR, RESULTS_DIR, IMAGES_DIR):
+    p.mkdir(parents=True, exist_ok=True)
 
-class GCN(nn.Module):
-    def __init__(self, in_dim: int, hid: int, out_dim: int, depth: int):
-        super().__init__()
-        self.convs = nn.ModuleList()
-        self.convs.append(GCNConv(in_dim, hid, add_self_loops=False))
-        for _ in range(depth - 2):
-            self.convs.append(GCNConv(hid, hid, add_self_loops=False))
-        self.convs.append(GCNConv(hid, out_dim, add_self_loops=False))
+# ---------------------------------------------------------------------------
+#  Helpers
+# ---------------------------------------------------------------------------
 
-    def forward(self, x, edge_index, *_):  # extra *args for API compatibility
-        for conv in self.convs[:-1]:
-            x = F.relu(conv(x, edge_index))
-        return self.convs[-1](x, edge_index)
+def _load_yaml(path: Path) -> Dict[str, Any]:
+    try:
+        with open(path, "r") as f:
+            return yaml.safe_load(f)
+    except FileNotFoundError as exc:
+        sys.exit(f"[config] File not found: {path}\n{exc}")
 
 
-# ------------------------------------------------------------------
-# SmuSH – only the *GCN* variant needed for the depth experiment
-# ------------------------------------------------------------------
-class _Controller(nn.Module):
-    def __init__(self, dim: int):
-        super().__init__()
-        self.fc1 = nn.Linear(dim + 3 + 16, 128)
-        self.fc2 = nn.Linear(128, 1)
+def _run_experiment(spec: Dict[str, Any]):
+    exp_name = spec["name"]
+    common = spec["common"]
+    runs: List[Dict[str, Any]] = spec["runs"]
 
-    def forward(self, h, s):
-        z = torch.cat([h, s], dim=1)
-        return torch.sigmoid(self.fc2(F.gelu(self.fc1(z)))).squeeze()
+    print("\n============================= EXPERIMENT:", exp_name, "=============================")
+    print("Running", len(runs), "configuration(s)")
 
+    for seed in (0, 1):  # demo seeds – extend to 20 for full paper
+        for run_cfg in runs:
+            merged_cfg = {
+                **run_cfg,
+                "exp_name": exp_name,
+                "seed": seed,
+                "optim": common["optim"],
+                "lambda_cons": common["lambda_cons"],
+            }
+            print(
+                f"\n--- Dataset {merged_cfg['dataset']} | {merged_cfg['model']['type']} | depth {merged_cfg['model']['depth']} | seed {seed} ---"
+            )
 
-def _alpha_edge_weight(edge_index, alpha):
-    row, col = edge_index
-    return alpha[row] * alpha[col]
+            experiment = GNNExperiment(merged_cfg, RESULTS_DIR, IMAGES_DIR)
+            result_dict = experiment.run()
 
+            # ------------------------- persistence -------------------------
+            json_name = (
+                f"{exp_name}_{merged_cfg['dataset']}_{merged_cfg['model']['type']}"  # base
+                f"_depth{merged_cfg['model']['depth']}_seed{seed}.json"
+            )
+            json_path = RESULTS_DIR / json_name
+            with open(json_path, "w") as fp:
+                json.dump(result_dict, fp, indent=2)
 
-class SmuSHGCN(nn.Module):
-    """Lightweight re-implementation sufficient for Exp-1."""
-
-    def __init__(self, in_dim: int, hid: int, out_dim: int, depth: int):
-        super().__init__()
-        self.convs = nn.ModuleList()
-        self.ctrls = nn.ModuleList()
-
-        # GCN layers -------------------------------------------------------
-        self.convs.append(GCNConv(in_dim, hid, add_self_loops=False))
-        for _ in range(depth - 2):
-            self.convs.append(GCNConv(hid, hid, add_self_loops=False))
-        self.convs.append(GCNConv(hid, out_dim, add_self_loops=False))
-
-        # Controller layers ------------------------------------------------
-        #   The first controller must see the *input*-dimensional features,
-        #   subsequent ones see the hidden-dimensional representations.
-        dims = [in_dim] + [hid] * (depth - 1)
-        for d in dims:
-            self.ctrls.append(_Controller(d))
-
-    # ---------------------------------------------------------
-    # Forward
-    # ---------------------------------------------------------
-    def forward(self, x, edge_index, struct_feat, hist):
-        for l, (conv, ctrl) in enumerate(zip(self.convs[:-1], self.ctrls[:-1])):
-            alpha = ctrl(x, torch.cat([struct_feat, hist], dim=1))
-            w = _alpha_edge_weight(edge_index, alpha)
-            x = F.relu(conv(x, edge_index, w))
-        return self.convs[-1](x, edge_index)
+            print("(JSON result)")
+            print(json.dumps(result_dict, indent=2))
+            print("Figures:", ", ".join(result_dict["figures"]))
 
 
-# -----------------------------------------------------------------------------
-# Configuration – loaded from YAML so that the user can edit parameters without
-# touching the source code.
-# -----------------------------------------------------------------------------
-CFG_PATH = pathlib.Path("config") / "config.yaml"
-if not CFG_PATH.exists():
-    CFG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    # default parameters identical to the original dataclass version
-    default_cfg = {
-        "exp1": {
-            "datasets": ["cora", "pubmed"],
-            "methods": ["vanilla", "smush"],
-            "depths": [4, 16, 32],
-            "hidden_dim": 256,
-            "max_epochs_by_depth": {"4": 400, "16": 800, "32": 1200},
-        }
-    }
-    with open(CFG_PATH, "w", encoding="utf-8") as fh:
-        yaml.safe_dump(default_cfg, fh, sort_keys=False)
-
-with open(CFG_PATH, "r", encoding="utf-8") as fh:
-    CFG = yaml.safe_load(fh)
-
-# -----------------------------------------------------------------------------
-# Output directories required by the grading instructions
-# -----------------------------------------------------------------------------
-RES_DIR = pathlib.Path(".research") / "iteration4"
-IMG_DIR = RES_DIR / "images"
-RES_DIR.mkdir(parents=True, exist_ok=True)
-IMG_DIR.mkdir(parents=True, exist_ok=True)
-
-# -----------------------------------------------------------------------------
-# EXPERIMENT 1 – Depth scalability (subset for brevity)
-# -----------------------------------------------------------------------------
-print("\n========== EXPERIMENT 1 – Depth Scalability ==========")
-
-exp1_cfg = CFG["exp1"]
-results = {}
-
-for dset in exp1_cfg["datasets"]:
-    data = get_dataset(dset)
-    results[dset] = {}
-
-    for method in exp1_cfg["methods"]:
-        results[dset][method] = {}
-        for depth in exp1_cfg["depths"]:
-            set_seed(0)
-            if method == "vanilla":
-                model = GCN(
-                    data.num_features,
-                    exp1_cfg["hidden_dim"],
-                    int(data.y.max()) + 1,
-                    depth,
-                )
-            elif method == "smush":
-                model = SmuSHGCN(
-                    data.num_features,
-                    exp1_cfg["hidden_dim"],
-                    int(data.y.max()) + 1,
-                    depth,
-                )
-            else:
-                raise NotImplementedError(method)
-
-            cfg = SimpleNamespace(max_epochs=exp1_cfg["max_epochs_by_depth"][str(depth)])
-            device = "cuda" if torch.cuda.is_available() else "cpu"
-            res = train_fullbatch(model, data, cfg, device)
-            results[dset][method][depth] = res
-            print(f"[Exp1] {dset:<10} | {method:<7} | depth {depth:<3} => {res}")
-
-# -----------------------------------------------------------------------------
-# Save & print JSON
-# -----------------------------------------------------------------------------
-json_path = RES_DIR / "exp1_results.json"
-with open(json_path, "w", encoding="utf-8") as fh:
-    json.dump(results, fh, indent=2)
-print(f"\nExperiment 1 completed – results saved to {json_path}\n")
-print(json.dumps(results, indent=2))
+# ---------------------------------------------------------------------------
+#  Main
+# ---------------------------------------------------------------------------
+if __name__ == "__main__":
+    full_cfg = _load_yaml(CONFIG_PATH)
+    for exp in full_cfg["experiments"]:
+        _run_experiment(exp)

@@ -1,16 +1,96 @@
-exp1:
-  datasets:
-  - cora
-  - pubmed
-  methods:
-  - vanilla
-  - smush
-  depths:
-  - 4
-  - 16
-  - 32
-  hidden_dim: 256
-  max_epochs_by_depth:
-    "4": 400
-    "16": 800
-    "32": 1200
+# Global configuration file consolidated from the original single-file script.
+# The file groups *all* experiments described in the paper – add or edit entries
+# here to conduct new sweeps.
+
+# ---------------------------------------------------------------------------
+#  Dataset catalogue (for documentation only – the loader uses torch-geo/OGB).
+# ---------------------------------------------------------------------------
+datasets:
+  cora: https://github.com/kimiyoung/planetoid
+  citeseer: https://github.com/kimiyoung/planetoid
+  pubmed: https://github.com/kimiyoung/planetoid
+  texas: https://github.com/geomstats/baselines
+  wisconsin: https://github.com/geomstats/baselines
+  chameleon: https://github.com/graphdeeplearning/benchmarking-gnns
+  squirrel: https://github.com/graphdeeplearning/benchmarking-gnns
+  ogbn-arxiv: https://ogb.stanford.edu/docs/nodeprop/
+  ogbn-products: https://ogb.stanford.edu/docs/nodeprop/
+
+# ---------------------------------------------------------------------------
+#  Experiment suites
+# ---------------------------------------------------------------------------
+experiments:
+  - name: stability
+    common:
+      optim:
+        lr: 0.005
+        weight_decay: 0.0005
+        patience: 50
+        epochs: 1500
+      lambda_cons: 0.5
+    runs:
+      - dataset: cora
+        model:
+          type: vanilla_gcn
+          depth: 4
+          hidden: 256
+      - dataset: cora
+        model:
+          type: smush_gcn
+          depth: 4
+          hidden: 256
+      - dataset: pubmed
+        model:
+          type: vanilla_gcn
+          depth: 8
+          hidden: 256
+      - dataset: pubmed
+        model:
+          type: smush_gcn
+          depth: 8
+          hidden: 256
+
+  - name: depth_sweep
+    common:
+      optim:
+        lr: 0.003
+        weight_decay: 0.0005
+        patience: 50
+        epochs: 2400
+      lambda_cons: 0.5
+    runs:
+      - dataset: cora
+        model:
+          type: vanilla_gcn
+          depth: 64
+          hidden: 256
+      - dataset: cora
+        model:
+          type: smush_gcn
+          depth: 64
+          hidden: 256
+      - dataset: ogbn-arxiv
+        model:
+          type: vanilla_gcn
+          depth: 64
+          hidden: 256
+      - dataset: ogbn-arxiv
+        model:
+          type: smush_gcn
+          depth: 64
+          hidden: 256
+
+  - name: robustness
+    common:
+      optim:
+        lr: 0.003
+        weight_decay: 0.0005
+        patience: 50
+        epochs: 2000
+      lambda_cons: 0.5
+    runs:
+      - dataset: ogbn-arxiv
+        model:
+          type: smush_gcn
+          depth: 32
+          hidden: 256
