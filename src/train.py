@@ -3,20 +3,18 @@
 continual-learning methods (CLIPON + baselines), JSON logger and high-level
 Trainer.
 
-Key fixes (iteration 7):
-1. **Device-mismatch bug-fix** – `BPQ.encode` now automatically moves the
-   codebook tensor to the *same device* as its input before the distance
-   computation.  This eliminates the previous
-   `RuntimeError: Expected all tensors to be on the same device` that occurred
-   whenever feature tensors were on the CPU while the model (and therefore the
-   learnable codebooks) resided on the GPU.
+Key fixes (iteration 8):
+1. **ViT input-resolution bug-fix** – Vision-Transformer backbones (e.g.
+   ``vit_t16``) require 224×224 inputs while CIFAR images are 32×32.  We now
+   up-sample CIFAR samples to 224 whenever a ViT backbone is used, eliminating
+       ``AssertionError: Input height (32) doesn't match model (224).``
 2. **Research-path update** – all artefacts (JSON results & figures) are now
    written to the mandatory
-       • JSON results → `.research/iteration7/`
-       • Figures       → `.research/iteration7/images/`
+       • JSON results → ``.research/iteration8/``
+       • Figures       → ``.research/iteration8/images/``
    directory structure required by the current evaluation harness.
-3. **Docstring refresh** – updated references from *iteration6* to
-   *iteration7* for consistency.
+3. **Docstring refresh** – updated references from *iteration7* to
+   *iteration8* for consistency.
 """
 from __future__ import annotations
 
@@ -340,9 +338,15 @@ class Trainer:
             self.logger.log({"warning": str(e), "dataset": dataset_name, "skipped": True})
             return  # gracefully skip unsupported datasets
 
+        # Adjust resolution for backbones that require larger inputs (e.g. ViTs)
+        if backbone.startswith("vit") and img_res < 224:
+            img_res_eff = 224
+        else:
+            img_res_eff = img_res
+
         self._seed_all(seed)
-        train_tf = get_train_transform(img_res, is_cifar)
-        test_tf = get_test_transform(img_res, is_cifar)
+        train_tf = get_train_transform(img_res_eff, is_cifar)
+        test_tf = get_test_transform(img_res_eff, is_cifar)
 
         # custom collate ----------------------------------------------------
         def _collate(batch):
@@ -390,7 +394,7 @@ class Trainer:
         # ------------------------------------------------------------------
         res = dict(dataset=dataset_name, method=method_name, seed=seed,
                    avg_accuracy=acc, runtime_s=runtime)
-        out_dir = Path(".research/iteration7")
+        out_dir = Path(".research/iteration8")
         out_dir.mkdir(parents=True, exist_ok=True)
         json_path = out_dir / f"{dataset_name}_{method_name}_{seed}.json"
         with open(json_path, "w") as f:
@@ -403,7 +407,7 @@ class Trainer:
         # confusion-matrix figure -----------------------------------------
         from matplotlib import pyplot as plt
 
-        img_dir = Path(".research/iteration7/images"); img_dir.mkdir(parents=True, exist_ok=True)
+        img_dir = Path(".research/iteration8/images"); img_dir.mkdir(parents=True, exist_ok=True)
         plt.figure(figsize=(6, 5))
         plt.imshow(cm, interpolation="nearest", cmap="Blues")
         plt.title("Confusion Matrix"); plt.colorbar(); plt.tight_layout()
