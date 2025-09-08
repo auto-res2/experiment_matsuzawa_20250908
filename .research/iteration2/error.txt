@@ -1,0 +1,99 @@
+Using CPython 3.11.13
+Creating virtual environment at: .venv
+Resolved 85 packages in 1.06s
+   Building clipon-research @ file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250908/experiment_matsuzawa_20250908
+Downloading matplotlib (8.3MiB)
+Downloading setuptools (1.1MiB)
+Downloading hf-xet (3.0MiB)
+Downloading networkx (1.9MiB)
+Downloading nvidia-cusparse-cu12 (274.9MiB)
+Downloading scikit-learn (9.3MiB)
+Downloading nvidia-cusolver-cu12 (255.1MiB)
+Downloading sympy (6.0MiB)
+Downloading nvidia-cudnn-cu12 (674.0MiB)
+Downloading pandas (11.8MiB)
+Downloading torchvision (8.2MiB)
+Downloading pyarrow (40.8MiB)
+Downloading nvidia-curand-cu12 (60.7MiB)
+Downloading scipy (33.7MiB)
+Downloading kiwisolver (1.4MiB)
+Downloading nvidia-cufft-cu12 (184.2MiB)
+Downloading torch (846.9MiB)
+Downloading nvidia-cuda-nvrtc-cu12 (84.0MiB)
+Downloading nvidia-cufile-cu12 (1.1MiB)
+Downloading numpy (16.2MiB)
+Downloading nvidia-cuda-cupti-cu12 (9.8MiB)
+Downloading triton (148.3MiB)
+Downloading nvidia-nccl-cu12 (307.4MiB)
+Downloading nvidia-cusparselt-cu12 (273.9MiB)
+Downloading nvidia-nvjitlink-cu12 (37.4MiB)
+Downloading timm (2.4MiB)
+Downloading fonttools (4.7MiB)
+Downloading aiohttp (1.7MiB)
+Downloading nvidia-cublas-cu12 (566.8MiB)
+Downloading pillow (6.3MiB)
+ Downloading nvidia-cufile-cu12
+ Downloading kiwisolver
+ Downloading aiohttp
+ Downloading hf-xet
+ Downloading timm
+ Downloading setuptools
+ Downloading networkx
+ Downloading fonttools
+      Built clipon-research @ file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250908/experiment_matsuzawa_20250908
+ Downloading pillow
+ Downloading torchvision
+ Downloading matplotlib
+ Downloading nvidia-cuda-cupti-cu12
+ Downloading scikit-learn
+ Downloading sympy
+ Downloading numpy
+ Downloading nvidia-nvjitlink-cu12
+ Downloading pandas
+ Downloading scipy
+ Downloading nvidia-curand-cu12
+ Downloading pyarrow
+ Downloading nvidia-cuda-nvrtc-cu12
+ Downloading triton
+ Downloading nvidia-cufft-cu12
+ Downloading nvidia-cusolver-cu12
+ Downloading nvidia-cusparse-cu12
+ Downloading nvidia-cusparselt-cu12
+ Downloading nvidia-nccl-cu12
+ Downloading nvidia-cublas-cu12
+  × Failed to download `nvidia-cudnn-cu12==9.10.2.21`
+  ├─▶ Failed to extract archive:
+  │   nvidia_cudnn_cu12-9.10.2.21-py3-none-manylinux_2_27_x86_64.whl
+  ├─▶ I/O operation failed during extraction
+  ╰─▶ failed to create file
+      `/home/toma/.cache/uv/.tmp0zxz7V/nvidia/cudnn/lib/libcudnn_ops.so.9`: No
+      such file or directory (os error 2)
+  help: `nvidia-cudnn-cu12` (v9.10.2.21) was included because
+        `clipon-research` (v0.1.0) depends on `torch` (v2.8.0) which depends
+        on `nvidia-cudnn-cu12`
+Downloading nvidia-cudnn-cu12 (674.0MiB)
+Downloading torch (846.9MiB)
+ Downloading nvidia-cudnn-cu12
+ Downloading torch
+Installed 69 packages in 4.68s
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'uoft-cs/cifar100' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Generating train split:   0%|          | 0/50000 [00:00<?, ? examples/s]Generating train split:  18%|█▊        | 8800/50000 [00:00<00:00, 85884.26 examples/s]Generating train split:  65%|██████▌   | 32500/50000 [00:00<00:00, 173614.08 examples/s]Generating train split: 100%|██████████| 50000/50000 [00:00<00:00, 116004.98 examples/s]
+Generating test split:   0%|          | 0/10000 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 10000/10000 [00:00<00:00, 88841.67 examples/s]
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'uoft-cs/cifar100' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'uoft-cs/cifar100' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250908/experiment_matsuzawa_20250908/src/main.py", line 45, in <module>
+    main()
+  File "/home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250908/experiment_matsuzawa_20250908/src/main.py", line 36, in main
+    trainer.run_task_sequence(m, bb, ds, int(sd))
+  File "/home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250908/experiment_matsuzawa_20250908/src/train.py", line 204, in run_task_sequence
+    raise NotImplementedError(method_name)
+NotImplementedError: er20

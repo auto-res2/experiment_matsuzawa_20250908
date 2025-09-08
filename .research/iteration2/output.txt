@@ -1,0 +1,4 @@
+=== uv sync start Mon Sep  8 03:00:18 PM UTC 2025 ===
+=== experiment start Mon Sep  8 03:01:03 PM UTC 2025 ===
+{"experiment": "exp1_pareto", "description": "Memory-vs-Accuracy Pareto Front (CIFAR / miniImageNet / Tiny-ImageNet)"}
+{"error": "er20", "dataset": "split_cifar100", "method": "er20", "seed": 11}
