@@ -1,0 +1,466 @@
+=== uv sync start Mon Sep  8 03:36:10 PM UTC 2025 ===
+=== uv install end Mon Sep  8 03:36:16 PM UTC 2025 ===
+=== experiment start Mon Sep  8 03:36:16 PM UTC 2025 ===
+{"experiment": "exp1_pareto", "description": "Memory-vs-Accuracy Pareto Front (CIFAR / miniImageNet / Tiny-ImageNet)"}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 11,
+  "avg_accuracy": 0.0414,
+  "runtime_s": 19.88706111907959
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 11, "avg_accuracy": 0.0414, "runtime_s": 19.88706111907959}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 17,
+  "avg_accuracy": 0.0198,
+  "runtime_s": 18.811172485351562
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 17, "avg_accuracy": 0.0198, "runtime_s": 18.811172485351562}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 23,
+  "avg_accuracy": 0.0226,
+  "runtime_s": 18.671499967575073
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 23, "avg_accuracy": 0.0226, "runtime_s": 18.671499967575073}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 29,
+  "avg_accuracy": 0.0568,
+  "runtime_s": 18.17258095741272
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 29, "avg_accuracy": 0.0568, "runtime_s": 18.17258095741272}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 41,
+  "avg_accuracy": 0.0325,
+  "runtime_s": 18.53814196586609
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 41, "avg_accuracy": 0.0325, "runtime_s": 18.53814196586609}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 11,
+  "avg_accuracy": 0.159,
+  "runtime_s": 8.434074878692627
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 11, "avg_accuracy": 0.159, "runtime_s": 8.434074878692627}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 17,
+  "avg_accuracy": 0.2327,
+  "runtime_s": 8.20826268196106
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 17, "avg_accuracy": 0.2327, "runtime_s": 8.20826268196106}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 23,
+  "avg_accuracy": 0.1633,
+  "runtime_s": 8.198968648910522
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 23, "avg_accuracy": 0.1633, "runtime_s": 8.198968648910522}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 29,
+  "avg_accuracy": 0.1156,
+  "runtime_s": 8.149078130722046
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 29, "avg_accuracy": 0.1156, "runtime_s": 8.149078130722046}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 41,
+  "avg_accuracy": 0.2505,
+  "runtime_s": 8.125587701797485
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 41, "avg_accuracy": 0.2505, "runtime_s": 8.125587701797485}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 11,
+  "avg_accuracy": 0.0098,
+  "runtime_s": 64.9196286201477
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 11, "avg_accuracy": 0.0098, "runtime_s": 64.9196286201477}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 17,
+  "avg_accuracy": 0.0953,
+  "runtime_s": 64.4038598537445
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 17, "avg_accuracy": 0.0953, "runtime_s": 64.4038598537445}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 23,
+  "avg_accuracy": 0.1346,
+  "runtime_s": 61.96230387687683
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 23, "avg_accuracy": 0.1346, "runtime_s": 61.96230387687683}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 29,
+  "avg_accuracy": 0.01,
+  "runtime_s": 63.60747313499451
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 29, "avg_accuracy": 0.01, "runtime_s": 63.60747313499451}
+{
+  "dataset": "split_cifar100",
+  "method": "er20",
+  "seed": 41,
+  "avg_accuracy": 0.0093,
+  "runtime_s": 67.5244505405426
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "er20", "seed": 41, "avg_accuracy": 0.0093, "runtime_s": 67.5244505405426}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mir", "method": "mir", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "mer", "method": "mer", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "aqm", "method": "aqm", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "occ", "method": "occ", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "dro_er", "method": "dro_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "sparcl_er", "method": "sparcl_er", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "orth_subspace", "method": "orth_subspace", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{"warning": "nispa_nr", "method": "nispa_nr", "skipped": true}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 11,
+  "avg_accuracy": 0.0794,
+  "runtime_s": 59.39288830757141
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 11, "avg_accuracy": 0.0794, "runtime_s": 59.39288830757141}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 17,
+  "avg_accuracy": 0.0861,
+  "runtime_s": 60.005499839782715
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 17, "avg_accuracy": 0.0861, "runtime_s": 60.005499839782715}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 23,
+  "avg_accuracy": 0.2724,
+  "runtime_s": 59.82814621925354
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 23, "avg_accuracy": 0.2724, "runtime_s": 59.82814621925354}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 29,
+  "avg_accuracy": 0.055,
+  "runtime_s": 62.71249222755432
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 29, "avg_accuracy": 0.055, "runtime_s": 62.71249222755432}
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 41,
+  "avg_accuracy": 0.01,
+  "runtime_s": 59.37002778053284
+}
+{"phase": "done", "dataset": "split_cifar100", "method": "clipon", "seed": 41, "avg_accuracy": 0.01, "runtime_s": 59.37002778053284}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'split_mini_imagenet' is not implemented.", "dataset": "split_mini_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"warning": "Dataset 'stream_tiny_imagenet' is not implemented.", "dataset": "stream_tiny_imagenet", "skipped": true}
+{"experiment": "exp2_scalability", "description": "1 000-task log-growth stress test (ImageNet-1K)"}
+{"warning": "Dataset 'imagenet1k_stream' is not implemented.", "dataset": "imagenet1k_stream", "skipped": true}
+{"warning": "Dataset 'imagenet1k_stream' is not implemented.", "dataset": "imagenet1k_stream", "skipped": true}
+{"warning": "Dataset 'imagenet1k_stream' is not implemented.", "dataset": "imagenet1k_stream", "skipped": true}
+{"experiment": "exp3_robustness", "description": "Robustness & Jetson deployment (CIFAR-100 checkpoints)"}
+{"warning": "Dataset 'cifar100_c' is not implemented.", "dataset": "cifar100_c", "skipped": true}
+{"warning": "Dataset 'cifar100_c' is not implemented.", "dataset": "cifar100_c", "skipped": true}
+{"warning": "Dataset 'cifar100_c' is not implemented.", "dataset": "cifar100_c", "skipped": true}
+{"warning": "Dataset 'cifar100_c' is not implemented.", "dataset": "cifar100_c", "skipped": true}
+{"warning": "Dataset 'cifar100_c' is not implemented.", "dataset": "cifar100_c", "skipped": true}
+{"warning": "Dataset 'cifar100_c' is not implemented.", "dataset": "cifar100_c", "skipped": true}
+{"warning": "Dataset 'cifar100_c' is not implemented.", "dataset": "cifar100_c", "skipped": true}
+{"warning": "Dataset 'cifar100_c' is not implemented.", "dataset": "cifar100_c", "skipped": true}
+{"warning": "Dataset 'cifar100_adv' is not implemented.", "dataset": "cifar100_adv", "skipped": true}
+{"warning": "Dataset 'cifar100_adv' is not implemented.", "dataset": "cifar100_adv", "skipped": true}
+{"warning": "Dataset 'cifar100_adv' is not implemented.", "dataset": "cifar100_adv", "skipped": true}
+{"warning": "Dataset 'cifar100_adv' is not implemented.", "dataset": "cifar100_adv", "skipped": true}
+{"warning": "Dataset 'cifar100_adv' is not implemented.", "dataset": "cifar100_adv", "skipped": true}
+{"warning": "Dataset 'cifar100_adv' is not implemented.", "dataset": "cifar100_adv", "skipped": true}
+{"warning": "Dataset 'cifar100_adv' is not implemented.", "dataset": "cifar100_adv", "skipped": true}
+{"warning": "Dataset 'cifar100_adv' is not implemented.", "dataset": "cifar100_adv", "skipped": true}
+=== experiment end Mon Sep  8 03:54:45 PM UTC 2025 ===

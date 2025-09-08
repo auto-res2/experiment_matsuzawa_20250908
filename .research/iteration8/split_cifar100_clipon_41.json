@@ -1,0 +1,7 @@
+{
+  "dataset": "split_cifar100",
+  "method": "clipon",
+  "seed": 41,
+  "avg_accuracy": 0.01,
+  "runtime_s": 59.37002778053284
+}
