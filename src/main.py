@@ -26,9 +26,9 @@ from .train import LeafLightningModule
 # Constants & Config loading
 # -----------------------------------------------------------------------------
 # Mandatory paths enforced by the grading specification
-BASE_RESEARCH_DIR = Path(".research") / "iteration3"  # ← UPDATED per spec
-IMAGES_DIR = BASE_RESEARCH_DIR / "images"              # ← UPDATED per spec (plots)
-EXPS_DIR = BASE_RESEARCH_DIR                            # each exp_<id> lives directly here
+BASE_RESEARCH_DIR = Path(".research") / "iteration4"  # ← UPDATED per spec
+IMAGES_DIR = BASE_RESEARCH_DIR / "images"               # ← UPDATED per spec (plots)
+EXPS_DIR = BASE_RESEARCH_DIR                             # each exp_<id> lives directly here
 CONF_PATH = Path(__file__).resolve().parent.parent / "config" / "config.yaml"
 
 CONFIG: Dict[str, Any]
@@ -72,7 +72,11 @@ def run_experiment(exp_cfg: Dict[str, Any]):
     )
 
     model_cfg = exp_cfg["models"][0]
-    module = LeafLightningModule(num_classes=num_classes, arch=model_cfg["arch"], cfg=CONFIG)
+
+    # Inject the *experiment-specific* LEAF section into the global cfg so that
+    # the LightningModule can access both.
+    cfg_for_module = {**CONFIG, "leaf": exp_cfg.get("leaf", {})}
+    module = LeafLightningModule(num_classes=num_classes, arch=model_cfg["arch"], cfg=cfg_for_module)
 
     ckpt_cb = ModelCheckpoint(
         dirpath=str(out_root / "checkpoints"), save_last=True, save_top_k=1, monitor="val/acc", mode="max"
@@ -101,7 +105,7 @@ def run_experiment(exp_cfg: Dict[str, Any]):
         if not ckpt_path.exists():
             raise RuntimeError("Pre-trained checkpoint for evaluation-only experiment not found.")
         module = LeafLightningModule.load_from_checkpoint(
-            str(ckpt_path), num_classes=num_classes, arch=model_cfg["arch"], cfg=CONFIG
+            str(ckpt_path), num_classes=num_classes, arch=model_cfg["arch"], cfg=cfg_for_module
         )
 
     # ------------------------------------------------------------------
@@ -117,7 +121,7 @@ def run_experiment(exp_cfg: Dict[str, Any]):
         "confusion_matrix": cm,
     }
 
-    # store JSON in the prescribed directory (.research/iteration3/)
+    # store JSON in the prescribed directory (.research/iteration4/)
     BASE_RESEARCH_DIR.mkdir(parents=True, exist_ok=True)
     json_path = BASE_RESEARCH_DIR / f"results_exp_{exp_id}.json"
     json_path.write_text(yaml.safe_dump(results_json, sort_keys=False))

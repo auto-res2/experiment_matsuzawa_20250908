@@ -70,7 +70,8 @@ class LeafLightningModule(LightningModule):
         self.model = timm.create_model(resolved_arch, pretrained=True, num_classes=num_classes)
 
         # Hyper-parameters for the (stubbed) spectral regulariser
-        self.gamma_cd: float = cfg["leaf"].get("gamma_cd", 0.0)
+        # Handle absence of experiment-specific `leaf` section gracefully.
+        self.gamma_cd: float = cfg.get("leaf", {}).get("gamma_cd", 0.0)
 
     # ------------------------------------------------------------------
     # Forward + helpers
