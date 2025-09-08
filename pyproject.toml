@@ -10,15 +10,16 @@ authors = [{ name = "Researcher", email = "research@example.com" }]
 readme = "README.md"
 requires-python = ">=3.9"
 
-# Run-time dependencies – kept minimal but sufficient.
-[project.dependencies]
-torch = ">=2.0"
-torchvision = ">=0.15"
-timm = "*"
-datasets = "*"
-PyYAML = "*"
-scikit-learn = "*"
-matplotlib = "*"
+# Run-time dependencies – kept minimal but must follow PEP 621 format (array of strings).
+dependencies = [
+    "torch>=2.0",
+    "torchvision>=0.15",
+    "timm",
+    "datasets",
+    "PyYAML",
+    "scikit-learn",
+    "matplotlib",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

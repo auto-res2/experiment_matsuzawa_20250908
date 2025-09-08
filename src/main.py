@@ -3,8 +3,17 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import List, Any
 
 from src.train import load_cfg, Trainer, StdJSONLogger
+
+
+def _resolve_seeds(exp: dict, cfg: dict) -> List[int]:
+    """Handle `${seed_list}` indirection in YAML."""
+    seeds_val: Any = exp.get("seeds", [])
+    if isinstance(seeds_val, str) and "seed_list" in seeds_val:
+        return cfg.get("seed_list", [])
+    return list(seeds_val)
 
 
 def main():
@@ -18,12 +27,13 @@ def main():
 
     for exp in cfg["experiments"]:
         logger.log({"experiment": exp["id"], "description": exp["description"]})
+        seeds = _resolve_seeds(exp, cfg)
         for ds in exp["datasets"]:
             for bb in exp["backbones"]:
                 for m in exp["methods"]:
-                    for sd in exp["seeds"]:
+                    for sd in seeds:
                         try:
-                            trainer.run_task_sequence(m, bb, ds, sd)
+                            trainer.run_task_sequence(m, bb, ds, int(sd))
                         except Exception as e:
                             logger.log({"error": str(e), "dataset": ds, "method": m, "seed": sd})
                             raise  # fail fast – no silent fallback

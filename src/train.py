@@ -215,21 +215,25 @@ class Trainer:
         # 5) save + log ----------------------------------------------------
         res = dict(dataset=dataset_name, method=method_name, seed=seed,
                    avg_accuracy=acc, runtime_s=runtime)
-        out_dir = Path(".research/iteration1")
+        out_dir = Path(".research/iteration2")
         out_dir.mkdir(parents=True, exist_ok=True)
         json_path = out_dir / f"{dataset_name}_{method_name}_{seed}.json"
         with open(json_path, "w") as f:
             json.dump(res, f, indent=2)
 
+        # also print JSON content for verification
+        print(json.dumps(res, indent=2), flush=True)
         self.logger.log({"phase": "done", **res})
 
         # confusion matrix figure (saved for later analysis) ---------------
         from matplotlib import pyplot as plt
+        img_dir = Path(".research/iteration2/images")
+        img_dir.mkdir(parents=True, exist_ok=True)
         plt.figure(figsize=(6, 5))
         plt.imshow(cm, interpolation="nearest", cmap="Blues")
         plt.title("Confusion Matrix")
         plt.colorbar()
         plt.tight_layout()
-        img_path = out_dir / f"confusion_{dataset_name}_{method_name}.pdf"
+        img_path = img_dir / f"confusion_{dataset_name}_{method_name}.pdf"
         plt.savefig(img_path, bbox_inches="tight")
         plt.close()
