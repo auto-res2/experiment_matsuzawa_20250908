@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 """src/main.py
-Entry point that orchestrates the whole experimental suite. Invoke via
+Entry point orchestrating the experimental suite. Invoke via
 
     python -m src.main
 
-All heavy lifting is delegated to the other modules so that this file only
-contains the *high-level* control-flow and I/O orchestration.
+All heavy lifting is delegated to other modules so that this file only
+contains *high-level* control-flow and I/O orchestration.
 """
 import math
 from pathlib import Path
@@ -26,14 +26,28 @@ from .train import LeafLightningModule
 # Constants & Config loading
 # -----------------------------------------------------------------------------
 # Mandatory paths enforced by the grading specification
-BASE_RESEARCH_DIR = Path(".research") / "iteration2"  # ← updated
-IMAGES_DIR = BASE_RESEARCH_DIR / "images"              # ← updated (plots)
-EXPS_DIR = BASE_RESEARCH_DIR                            # each exp_<id> lives directly here per spec
+BASE_RESEARCH_DIR = Path(".research") / "iteration3"  # ← UPDATED per spec
+IMAGES_DIR = BASE_RESEARCH_DIR / "images"              # ← UPDATED per spec (plots)
+EXPS_DIR = BASE_RESEARCH_DIR                            # each exp_<id> lives directly here
 CONF_PATH = Path(__file__).resolve().parent.parent / "config" / "config.yaml"
 
 CONFIG: Dict[str, Any]
 with open(CONF_PATH) as f:
     CONFIG = yaml.safe_load(f)
+
+
+# -----------------------------------------------------------------------------
+# Helper – precision selection
+# -----------------------------------------------------------------------------
+
+def _select_precision(user_precision: str | int):
+    """Downgrade *bf16* precision automatically on incompatible hardware."""
+    if isinstance(user_precision, str) and str(user_precision).startswith("bf16"):
+        # Tesla T4 (SM75) does *not* support bf16 → fall back to fp32.
+        if not (torch.cuda.is_available() and torch.cuda.is_bf16_supported()):
+            return 32
+    return user_precision
+
 
 # -----------------------------------------------------------------------------
 # Core logic
@@ -65,10 +79,12 @@ def run_experiment(exp_cfg: Dict[str, Any]):
     )
     lr_cb = LearningRateMonitor(logging_interval="step")
 
+    precision_setting = _select_precision(CONFIG["global"]["precision"])
+
     trainer = Trainer(
         accelerator="gpu" if torch.cuda.is_available() else "cpu",
         devices=torch.cuda.device_count() if torch.cuda.is_available() else 1,
-        precision=CONFIG["global"]["precision"],
+        precision=precision_setting,
         max_epochs=exp_cfg["epochs"],
         accumulate_grad_batches=CONFIG["global"]["accumulate_grad_batches"],
         benchmark=True,
@@ -101,7 +117,7 @@ def run_experiment(exp_cfg: Dict[str, Any]):
         "confusion_matrix": cm,
     }
 
-    # store JSON in the prescribed directory (.research/iteration2/)
+    # store JSON in the prescribed directory (.research/iteration3/)
     BASE_RESEARCH_DIR.mkdir(parents=True, exist_ok=True)
     json_path = BASE_RESEARCH_DIR / f"results_exp_{exp_id}.json"
     json_path.write_text(yaml.safe_dump(results_json, sort_keys=False))
