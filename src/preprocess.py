@@ -3,10 +3,9 @@ from __future__ import annotations
 
 import pathlib
 from functools import lru_cache
-from typing import Tuple, Optional
 
 import torch
-from torch_geometric.datasets import Planetoid, WikipediaNetwork, Texas, Chameleon, Squirrel
+from torch_geometric.datasets import Planetoid, WikipediaNetwork, WebKB
 from torch_geometric.transforms import NormalizeFeatures
 from torch_geometric.utils import remove_self_loops, add_self_loops
 from ogb.nodeproppred import PygNodePropPredDataset
@@ -16,7 +15,6 @@ DATA_ROOT = pathlib.Path("data")
 DATA_ROOT.mkdir(parents=True, exist_ok=True)
 
 __all__ = ["get_dataset"]
-
 
 # -----------------------------------------------------------------------------
 # Helper functions
@@ -47,7 +45,7 @@ def get_dataset(name: str):  # noqa: C901 (complexity – mirrors original code)
         data = dataset[0]
 
     elif name == "texas":
-        dataset = Texas(root=str(root))
+        dataset = WebKB(root=str(root), name="Texas", transform=NormalizeFeatures())
         data = dataset[0]
 
     elif name == "ogbn-arxiv":

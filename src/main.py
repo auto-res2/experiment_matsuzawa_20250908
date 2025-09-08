@@ -15,10 +15,6 @@ from .preprocess import get_dataset
 # -----------------------------------------------------------------------------
 # Minimal *models* inside the same file to comply with the 6-file restriction
 # -----------------------------------------------------------------------------
-# The original project kept models in ``src/models`` – here we embed the few
-# actually referenced architectures (GCN + SmuSHGCN) so that no extra module is
-# required.
-# -----------------------------------------------------------------------------
 import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
@@ -111,11 +107,10 @@ with open(CFG_PATH, "r", encoding="utf-8") as fh:
 # -----------------------------------------------------------------------------
 # Output directories required by the grading instructions
 # -----------------------------------------------------------------------------
-RES_DIR = pathlib.Path(".research") / "iteration2"
+RES_DIR = pathlib.Path(".research") / "iteration3"
 IMG_DIR = RES_DIR / "images"
 RES_DIR.mkdir(parents=True, exist_ok=True)
 IMG_DIR.mkdir(parents=True, exist_ok=True)
-
 
 # -----------------------------------------------------------------------------
 # EXPERIMENT 1 – Depth scalability (subset for brevity)

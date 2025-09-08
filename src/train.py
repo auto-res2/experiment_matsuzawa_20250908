@@ -37,6 +37,7 @@ def set_seed(seed: int) -> None:
 # Full-batch supervised node-classification trainer
 # -----------------------------------------------------------------------------
 
+
 def _prepare_hist(num_nodes: int, dim: int, device: torch.device) -> torch.Tensor:
     """Returns an all-zeros history tensor used by the SmuSH controller."""
     return torch.zeros(num_nodes, dim, device=device)
