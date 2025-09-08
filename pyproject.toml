@@ -33,4 +33,4 @@ dependencies = [
 ]
 
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=42", "wheel" ]

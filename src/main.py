@@ -8,6 +8,7 @@ Entry point orchestrating the experimental suite. Invoke via
 All heavy lifting is delegated to other modules so that this file only
 contains *high-level* control-flow and I/O orchestration.
 """
+import json
 import math
 from pathlib import Path
 from typing import Any, Dict, List
@@ -26,9 +27,9 @@ from .train import LeafLightningModule
 # Constants & Config loading
 # -----------------------------------------------------------------------------
 # Mandatory paths enforced by the grading specification
-BASE_RESEARCH_DIR = Path(".research") / "iteration4"  # ← UPDATED per spec
-IMAGES_DIR = BASE_RESEARCH_DIR / "images"               # ← UPDATED per spec (plots)
-EXPS_DIR = BASE_RESEARCH_DIR                             # each exp_<id> lives directly here
+BASE_RESEARCH_DIR = Path(".research") / "iteration5"  # ← UPDATED per spec
+IMAGES_DIR = BASE_RESEARCH_DIR / "images"  # ← UPDATED per spec (plots)
+EXPS_DIR = BASE_RESEARCH_DIR  # each exp_<id> lives directly here
 CONF_PATH = Path(__file__).resolve().parent.parent / "config" / "config.yaml"
 
 CONFIG: Dict[str, Any]
@@ -79,7 +80,11 @@ def run_experiment(exp_cfg: Dict[str, Any]):
     module = LeafLightningModule(num_classes=num_classes, arch=model_cfg["arch"], cfg=cfg_for_module)
 
     ckpt_cb = ModelCheckpoint(
-        dirpath=str(out_root / "checkpoints"), save_last=True, save_top_k=1, monitor="val/acc", mode="max"
+        dirpath=str(out_root / "checkpoints"),
+        save_last=True,
+        save_top_k=1,
+        monitor="val/acc",
+        mode="max",
     )
     lr_cb = LearningRateMonitor(logging_interval="step")
 
@@ -121,10 +126,10 @@ def run_experiment(exp_cfg: Dict[str, Any]):
         "confusion_matrix": cm,
     }
 
-    # store JSON in the prescribed directory (.research/iteration4/)
+    # store JSON in the prescribed directory (.research/iteration5/)
     BASE_RESEARCH_DIR.mkdir(parents=True, exist_ok=True)
     json_path = BASE_RESEARCH_DIR / f"results_exp_{exp_id}.json"
-    json_path.write_text(yaml.safe_dump(results_json, sort_keys=False))
+    json_path.write_text(json.dumps(results_json, indent=2))
 
     print("\n--- RESULTS (JSON) ---")
     print_json(results_json)
@@ -139,7 +144,12 @@ def run_experiment(exp_cfg: Dict[str, Any]):
         df = pd.read_csv(metrics_file)
         if "val/acc" in df.columns:
             vals = df.dropna(subset=["val/acc"])["val/acc"].tolist()
-            plot_curve(vals, title="Validation Accuracy", ylabel="Acc", save_path=IMAGES_DIR / f"accuracy_exp_{exp_id}")
+            plot_curve(
+                vals,
+                title="Validation Accuracy",
+                ylabel="Acc",
+                save_path=IMAGES_DIR / f"accuracy_exp_{exp_id}",
+            )
             print("Figure saved:", IMAGES_DIR / f"accuracy_exp_{exp_id}.pdf")
 
 
@@ -158,7 +168,7 @@ def main():
             print(f"\n>>> Running seed {seed} for experiment {exp['id']}")
             run_experiment(exp)
             # accuracy already saved – reload for aggregation
-            acc = yaml.safe_load((BASE_RESEARCH_DIR / f"results_exp_{exp['id']}.json").read_text())["accuracy"]
+            acc = json.loads((BASE_RESEARCH_DIR / f"results_exp_{exp['id']}.json").read_text())["accuracy"]
             seed_accum.append(acc)
         mean_acc = sum(seed_accum) / len(seed_accum)
         se = (torch.std(torch.tensor(seed_accum)) / math.sqrt(len(seed_accum))).item()
